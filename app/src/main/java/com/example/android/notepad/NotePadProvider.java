@@ -63,7 +63,7 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
     /**
      * The database version
      */
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     /**
      * A projection map used to select columns from the database
@@ -155,8 +155,9 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
         sNotesProjectionMap.put(
                 NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,
                 NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE);
-        sNotesProjectionMap.put(NotePad.Notes.COLOR, NotePad.Notes.COLOR);
-        sNotesProjectionMap.put(NotePad.Notes.TABLE_NAME_GROUP_NAME, NotePad.Notes.TABLE_NAME_GROUP_NAME);
+        sNotesProjectionMap.put(NotePad.Notes.GROUP_ID, NotePad.Notes.GROUP_ID);
+        sNotesProjectionMap.put(NotePad.Notes.GROUP_NAME, NotePad.Notes.GROUP_NAME);
+
 
         /*
          * Creates an initializes a projection map for handling Live Folders
@@ -199,18 +200,11 @@ public class NotePadProvider extends ContentProvider implements PipeDataWriter<C
                    + NotePad.Notes.COLUMN_NAME_NOTE + " TEXT,"
                    + NotePad.Notes.COLUMN_NAME_CREATE_DATE + " INTEGER,"
                    + NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE + " INTEGER,"
-                   + NotePad.Notes.COLOR + " INTEGER,"
-                   + NotePad.Notes.TABLE_NAME_GROUP_NAME + " TEXT"
-                   + ");");
-           db.execSQL("CREATE TABLE " + NotePad.Notes.TABLE_NAME_GROUP + " ("
-                   + NotePad.Notes._ID + " INTEGER PRIMARY KEY ,"
-                   + NotePad.Notes.TABLE_NAME_GROUP_NAME + " TEXT,"
-
+                   + NotePad.Notes.GROUP_ID + " INTEGER,"
+                   + NotePad.Notes.GROUP_NAME + " TEXT"
                    + ");");
 
-          db.execSQL("insert into " + NotePad.Notes.TABLE_NAME_GROUP +"values (null,?)",
-                  new String[]{"生活"}
-          );
+
        }
 
        /**

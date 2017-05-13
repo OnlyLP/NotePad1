@@ -1,0 +1,6 @@
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList$2.class
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList$3.class
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList$1.class
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList$5.class
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList$4.class
+CHANGED,C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\instantRun\debug\folders\1\5\main\com\example\android\notepad\NotesList.class

@@ -36,7 +36,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -65,7 +67,8 @@ public class NoteEditor extends Activity {
         new String[] {
             NotePad.Notes._ID,
             NotePad.Notes.COLUMN_NAME_TITLE,
-            NotePad.Notes.COLUMN_NAME_NOTE
+            NotePad.Notes.COLUMN_NAME_NOTE,
+                NotePad.Notes.GROUP_ID
     };
 
     // A label for the saved state of the activity
@@ -82,7 +85,7 @@ public class NoteEditor extends Activity {
     private Cursor mCursor;
     private EditText mText;
     private String mOriginalContent;
-
+  private Spinner spinner;
     /**
      * Defines a custom EditText View that draws lines between each line of text that is displayed.
      */
@@ -148,6 +151,7 @@ public class NoteEditor extends Activity {
          * Creates an Intent to use when the Activity object's result is sent back to the
          * caller.
          */
+
         final Intent intent = getIntent();
 
         /*
@@ -240,6 +244,10 @@ public class NoteEditor extends Activity {
         if (savedInstanceState != null) {
             mOriginalContent = savedInstanceState.getString(ORIGINAL_CONTENT);
         }
+        mCursor.moveToFirst();
+        spinner=(Spinner) findViewById(R.id.spinner);
+        spinner.setSelection(mCursor.getInt(3));
+
     }
 
     /**
@@ -569,7 +577,8 @@ public class NoteEditor extends Activity {
         // This puts the desired notes text into the map.
         values.put(NotePad.Notes.COLUMN_NAME_NOTE, text);
         values.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,t);
-        values.put(NotePad.Notes.COLOR,1);
+        values.put(NotePad.Notes.GROUP_ID,spinner.getSelectedItemPosition());
+        values.put(NotePad.Notes.GROUP_NAME,spinner.getSelectedItem().toString());
         /*
          * Updates the provider with the new values in the map. The ListView is updated
          * automatically. The provider sets this up by setting the notification URI for
@@ -627,5 +636,6 @@ public class NoteEditor extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));//使本activity改变字体
+
     }
 }

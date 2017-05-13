@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:id="@+id/drawerlayout"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools" >
-<LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f0f0f0"
+
     android:id="@+id/list12">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -41,7 +36,12 @@
 
 
     </RelativeLayout>
-
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:entries="@array/group"
+        android:id="@+id/spinner1"
+        />
 
 
 
@@ -68,22 +68,3 @@
    </RelativeLayout>
 
 </LinearLayout>
-    <LinearLayout
-        android:id="@+id/drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical"
-        android:background="#ffffff">
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-
-
-
-    </LinearLayout>
-
-
-</android.support.v4.widget.DrawerLayout>

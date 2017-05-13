@@ -13,4 +13,14 @@
 
     </style>
 
+    <string-array name="group">
+        <item>全部</item>
+        <item>生活</item>
+        <item>记账</item>
+        <item>学习</item>
+        <item>其他</item>
+
+
+    </string-array>
+
 </resources>

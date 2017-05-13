@@ -153,5 +153,8 @@ public final class NotePad {
          */
         public static final String COLUMN_NAME_MODIFICATION_DATE = "modified";
         public static final String COLOR = "color";
+
+        public static final String GROUP_ID="groupid";
+        public  static  final String GROUP_NAME="groupname";
     }
 }

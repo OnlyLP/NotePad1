@@ -53,6 +53,8 @@ import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
 import  android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.widget.Spinner;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -80,6 +82,7 @@ public class NotesList extends Activity {
     ListView listView=null;
     EditText editText=null;
     LinearLayout linearLayout=null;
+    Spinner spinner;
     /**
      * The columns needed by the cursor adapter
      */
@@ -105,6 +108,7 @@ public class NotesList extends Activity {
         setContentView(R.layout.list);
         listView=(ListView) findViewById(R.id.mainlist);
         linearLayout=(LinearLayout) findViewById(R.id.list12);
+        spinner=(Spinner) findViewById(R.id.spinner1);
         //设置背景
        setBackgroundMenu();
         /* If no data is given in the Intent that started this Activity, then this Activity
@@ -112,6 +116,33 @@ public class NotesList extends Activity {
          * provider URI.
          */
         // Gets the intent that started this Activity.
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if ("全部".equals(spinner.getSelectedItem().toString()))
+                    cursor = managedQuery(
+                            getIntent().getData(),            // Use the default content URI for the provider.
+                            PROJECTION,                       // Return the note ID and title for each note.
+                            null,                          // No where clause, return all records.
+                            null,                             // No where clause, therefore no where column values.
+                            null // Use the default sort order.
+                    );
+                else
+                cursor = managedQuery(
+                        getIntent().getData(),            // Use the default content URI for the provider.
+                        PROJECTION,                       // Return the note ID and title for each note.
+                        NotePad.Notes.GROUP_ID+" = ?",                             // No where clause, return all records.
+                        new String[]{position+""},                             // No where clause, therefore no where column values.
+                        null // Use the default sort order.
+                );
+                aaa();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
     private  void  sss()
@@ -158,17 +189,7 @@ public class NotesList extends Activity {
          * The SimpleCursorAdapter maps them in ascending order to determine where each column
          * value will appear in the ListView.
          */
-        List<Map<String,Object>> mapLists=new ArrayList<Map<String,Object>>();
-        while (cursor.moveToNext())
-        {
-            Map<String,Object> map=new HashMap<String,Object>();
-            map.put(NotePad.Notes._ID,cursor.getString(0));
-            map.put(NotePad.Notes.COLUMN_NAME_TITLE,cursor.getString(1));
-            map.put(NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE,cursor.getString(2));
-         //   map.put("header",R.drawable.app_notes);
-            mapLists.add(map);
 
-        }
 
         // The names of the cursor columns to display in the view, initialized to the title column
         String[] dataColumns = { NotePad.Notes.COLUMN_NAME_TITLE, NotePad.Notes.COLUMN_NAME_MODIFICATION_DATE} ;
@@ -253,8 +274,8 @@ public class NotesList extends Activity {
             cursor = managedQuery(
                     getIntent().getData(),            // Use the default content URI for the provider.
                     PROJECTION,                       // Return the note ID and title for each note.
-                    NotePad.Notes.COLUMN_NAME_TITLE+"   "+"like ?",                             // No where clause, return all records.
-                    new String[]{"%"+editText.getText().toString()+"%"},                             // No where clause, therefore no where column values.
+                    NotePad.Notes.COLUMN_NAME_TITLE+"   "+"like ? and"+ NotePad.Notes.GROUP_NAME+" = ?",                             // No where clause, return all records.
+                    new String[]{"%"+editText.getText().toString()+"%",spinner.getSelectedItem().toString()},                             // No where clause, therefore no where column values.
                     null // Use the default sort order.
             );
             aaa();
@@ -477,8 +498,8 @@ public class NotesList extends Activity {
         Intent intent = new Intent(null, Uri.withAppendedPath(getIntent().getData(), 
                                         Integer.toString((int) info.id) ));
         intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
-        menu.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
-                new ComponentName(this, NotesList.class), null, intent, 0, null);
+       menu.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
+               new ComponentName(this, NotesList.class), null, intent, 0, null);
     }
 
     /**
@@ -535,6 +556,7 @@ public class NotesList extends Activity {
         case R.id.context_open:
             // Launch activity to view/edit the currently selected item
             startActivity(new Intent(Intent.ACTION_EDIT, noteUri));
+
             return true;
 //BEGIN_INCLUDE(copy)
         case R.id.context_copy:
@@ -566,6 +588,9 @@ public class NotesList extends Activity {
              onResume();
             // Returns to the caller and skips further processing.
             return true;
+            case R.id.www:
+                Log.e("111","22222");
+                return false;
         default:
             return super.onContextItemSelected(item);
         }
@@ -617,7 +642,7 @@ public class NotesList extends Activity {
         };
         appbackground = getSharedPreferences("noteapp", MODE_PRIVATE);
         NoteAttribute.snoteBackground=appbackground.getInt(NoteAttribute.NOTEBACKGROUND,colorArray[1]);//默认为黄色
-        listView.setBackgroundColor(NoteAttribute.snoteBackground);
+        linearLayout.setBackgroundColor(NoteAttribute.snoteBackground);
         //修改悬浮按钮背景
         final int[] coseArray={
                 R.drawable.cose1,
@@ -655,7 +680,7 @@ public class NotesList extends Activity {
                 @Override
                 public void onClick(View v) {
                     NoteAttribute.snoteBackground=colorArray[finalI];
-                    listView.setBackgroundColor(NoteAttribute.snoteBackground);
+                    linearLayout.setBackgroundColor(NoteAttribute.snoteBackground);
                     icon.setImageDrawable(getDrawable(coseArray[finalI]));
                     //把背景颜色添加到SharedPreferences中
                     appbackground
@@ -663,7 +688,7 @@ public class NotesList extends Activity {
                             .putInt(NoteAttribute.NOTEBACKGROUND,colorArray[finalI])
                             .putInt(NoteAttribute.COLORSELECTICON,coseArray[finalI])
                             .apply();
-                    listView.setBackgroundColor(NoteAttribute.snoteBackground);
+                    linearLayout.setBackgroundColor(NoteAttribute.snoteBackground);
                 }
             });
             menuBuilder.addSubActionView(button);

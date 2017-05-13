@@ -4,35 +4,52 @@
     api-level="23"
     density="xxhdpi"
     format="7"
-    timestamp="701047038087628"
-    token="-4609640262420626660" >
+    timestamp="1052524573263340"
+    token="-4609640262420626660"
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="184" />
+        duration="201" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="524" />
     <task
         name="instant-run-transform"
-        duration="31" />
+        duration="28" />
     <task
         name="verifier"
-        duration="5" />
+        duration="3" />
 
     <artifact
-        location="C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
-        type="DEX" />
+        location="C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
-    <build timestamp="700809474108947" >
+    <build timestamp="1051698536164970" >
         <artifact
             location="C:\Users\Y430P\Desktop\NotePad-master\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
-    <build timestamp="701047038087628" >
+    <build
+        timestamp="1052238378550385"
+        verifier="CLASS_ADDED" >
         <artifact
             location="C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
             type="DEX" />
+    </build>
+    <build
+        timestamp="1052408689827653"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\builds\debug\1052408689827653\classes.dex"
+            type="RELOAD_DEX" />
+    </build>
+    <build
+        timestamp="1052524573263340"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="C:\Users\Y430P\Desktop\NotePad-master\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
