@@ -22,8 +22,8 @@
 
 ### 在首页可以利用分组功能进行快速查询
 
+![](https://github.com/OnlyLP/NotePad1/blob/master/image/4.jpg)
 ![](https://github.com/OnlyLP/NotePad1/blob/master/image/5.jpg)
-![](https://github.com/OnlyLP/NotePad1/blob/master/image/6.jpg)
 
 # 本APP免费
 
